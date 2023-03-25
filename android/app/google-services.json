@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "621239592737",
+    "project_id": "qvent-74d2c",
+    "storage_bucket": "qvent-74d2c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621239592737:android:7711cb3b570e88846f4060",
+        "android_client_info": {
+          "package_name": "com.example.qvent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621239592737-d72t7qsigaes3nm7rtj56fnnd7hb3m3t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAh73_45o8JAQXFP_faKK93mQcIt_OfXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "621239592737-d72t7qsigaes3nm7rtj56fnnd7hb3m3t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
