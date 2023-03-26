@@ -5,14 +5,14 @@ import 'create_event.dart';
 //Services
 import '../services/firebase_services.dart';
 
-class EventsPage extends StatefulWidget {
-  const EventsPage({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<EventsPage> createState() => _EventsPageState();
+  State<Home> createState() => _HomeState();
 }
 
-class _EventsPageState extends State<EventsPage> {
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

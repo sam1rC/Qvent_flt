@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'pages/events.dart';
+import 'pages/home.dart';
 //Firebase import
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -67,7 +67,7 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
           ),
-          home: const EventsPage(),
+          home: const Home(),
         );
       },
     );
