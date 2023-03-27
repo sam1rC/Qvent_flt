@@ -5,14 +5,14 @@ import 'create_event.dart';
 //Services
 import '../services/firebase_services.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeState extends State<Home> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,14 +21,10 @@ class _HomeState extends State<Home> {
         title: const Text('Eventos'),
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return const CreateEventPage();
-                  },
-                ),
-              );
+            onPressed: () async {
+              await Navigator.pushNamed(context, '/create_event');
+              //update the home page
+              setState(() {});
             },
             icon: const Icon(Icons.add_circle_outlined),
           ),

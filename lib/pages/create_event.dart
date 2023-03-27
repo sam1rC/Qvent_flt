@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
+//Firebase
+import '../services/firebase_services.dart';
 
 class CreateEventPage extends StatelessWidget {
   const CreateEventPage({super.key});
@@ -24,11 +26,8 @@ class EventCreationForm extends StatefulWidget {
   State<EventCreationForm> createState() => _EventCreationFormState();
 }
 
-TextEditingController dateController = TextEditingController();
-@override
-void initState() {
-  dateController.text = "";
-}
+TextEditingController dateController = TextEditingController(text: "");
+TextEditingController nameController = TextEditingController(text: "");
 
 class _EventCreationFormState extends State<EventCreationForm> {
   @override
@@ -45,7 +44,12 @@ class _EventCreationFormState extends State<EventCreationForm> {
               const EventDateWidget(),
               SizedBox(height: 5.h),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await addEvent(nameController.text, dateController.text)
+                      .then((_) {
+                    Navigator.pop(context);
+                  });
+                },
                 child: const Text('Crear'),
               )
             ],
@@ -66,9 +70,10 @@ class EventNameWidget extends StatefulWidget {
 class _EventNameWidgetState extends State<EventNameWidget> {
   @override
   Widget build(BuildContext context) {
-    return const TextField(
-      decoration:
-          InputDecoration(border: OutlineInputBorder(), hintText: 'Nombre'),
+    return TextField(
+      controller: nameController,
+      decoration: const InputDecoration(
+          border: OutlineInputBorder(), hintText: 'Nombre'),
     );
   }
 }
