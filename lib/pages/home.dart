@@ -37,7 +37,21 @@ class _HomePageState extends State<HomePage> {
             return ListView.builder(
               itemCount: snapshot.data?.length,
               itemBuilder: (context, index) {
-                return Text(snapshot.data?[index]['name']);
+                return Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.5.h),
+                  child: Card(
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 5.h,
+                      child: Row(
+                        children: [
+                          Text(snapshot.data?[index]['name']),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
               },
             );
           } else {
