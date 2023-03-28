@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () async {
-              await Navigator.pushNamed(context, '/create_event');
+              await Navigator.pushNamed(context, '/create');
               //update the home page
               setState(() {});
             },
@@ -39,7 +39,16 @@ class _HomePageState extends State<HomePage> {
             return ListView.builder(
               itemCount: snapshot.data?.length,
               itemBuilder: (context, index) {
-                return CardWidget(title: snapshot.data?[index]['name']);
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/event_info', arguments: {
+                      "name": snapshot.data?[index]['name'],
+                      "tickets": snapshot.data?[index]['tickets'],
+                      "read_tickets": snapshot.data?[index]['read_tickets'],
+                    });
+                  },
+                  child: CardWidget(title: snapshot.data?[index]['name']),
+                );
               },
             );
           } else {

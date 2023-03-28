@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:qvent/pages/event_info.dart';
 import 'package:sizer/sizer.dart';
 //Pages
 import 'pages/home.dart';
 import 'pages/create_event.dart';
+import 'pages/event_info.dart';
 //Firebase import
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -52,6 +54,7 @@ class _MyAppState extends State<MyApp> {
                 fontSize: 30.sp,
                 color: const Color(0xFFD5CEA3),
               ),
+              elevation: 0,
             ),
             textTheme: const TextTheme(
               bodyMedium: TextStyle(
@@ -72,7 +75,8 @@ class _MyAppState extends State<MyApp> {
           initialRoute: '/',
           routes: {
             '/': (context) => const HomePage(),
-            '/create_event': (context) => const CreateEventPage(),
+            '/create': (context) => const CreateEventPage(),
+            '/event_info': (context) => const EventInfoPage(),
           },
         );
       },
