@@ -4,6 +4,8 @@ import 'package:sizer/sizer.dart';
 import 'create_event.dart';
 //Services
 import '../services/firebase_services.dart';
+//Custom widgets
+import '../widgets/card_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -37,25 +39,7 @@ class _HomePageState extends State<HomePage> {
             return ListView.builder(
               itemCount: snapshot.data?.length,
               itemBuilder: (context, index) {
-                return Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.5.h),
-                  child: Card(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 2.w, vertical: 0.5.h),
-                      child: SizedBox(
-                        width: double.infinity,
-                        height: 5.h,
-                        child: Row(
-                          children: [
-                            Text(snapshot.data?[index]['name']),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                );
+                return CardWidget(title: snapshot.data?[index]['name']);
               },
             );
           } else {
