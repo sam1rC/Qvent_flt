@@ -41,13 +41,17 @@ class _HomePageState extends State<HomePage> {
                   padding:
                       EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.5.h),
                   child: Card(
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 5.h,
-                      child: Row(
-                        children: [
-                          Text(snapshot.data?[index]['name']),
-                        ],
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 2.w, vertical: 0.5.h),
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 5.h,
+                        child: Row(
+                          children: [
+                            Text(snapshot.data?[index]['name']),
+                          ],
+                        ),
                       ),
                     ),
                   ),
