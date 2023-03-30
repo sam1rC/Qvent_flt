@@ -25,7 +25,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // This widget is the root of your application.
+  // This widget is the root of the application..
   @override
   Widget build(BuildContext context) {
     return Sizer(
@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
               color: const Color(0xFF5F8D4E),
               foregroundColor: const Color(0xFFD5CEA3),
               titleTextStyle: TextStyle(
-                fontSize: 30.sp,
+                fontSize: 20.sp,
                 color: const Color(0xFFD5CEA3),
               ),
               elevation: 0,

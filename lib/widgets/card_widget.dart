@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 //Sizer tool
 import 'package:sizer/sizer.dart';
 
+//This widget is the card being displayed in the home page with each event title.
 class CardWidget extends StatelessWidget {
   const CardWidget({
     super.key,

@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 //Firebase
 import '../services/firebase_services.dart';
 
+//This page contains the form to create a new event.
 class CreateEventPage extends StatelessWidget {
   const CreateEventPage({super.key});
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 //Sizer tool
 import 'package:sizer/sizer.dart';
 
+//This page displays the event information like available tickets and read tickets. It also contains the button to create and read tickets.
 class EventInfoPage extends StatefulWidget {
   const EventInfoPage({super.key});
 
@@ -23,6 +24,7 @@ class _EventInfoPageState extends State<EventInfoPage> {
   }
 }
 
+//This is the top card with the event information mentioned above.
 class EventInfoCard extends StatefulWidget {
   const EventInfoCard({super.key});
 
