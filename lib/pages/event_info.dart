@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 //Sizer tool
 import 'package:sizer/sizer.dart';
+//AutoSize Text tool
+import 'package:auto_size_text/auto_size_text.dart';
 
 //This page displays the event information like available tickets and read tickets. It also contains the button to create and read tickets.
 class EventInfoPage extends StatefulWidget {
@@ -42,10 +44,10 @@ class _EventInfoCardState extends State<EventInfoCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8.0.w, vertical: 2.h),
+      padding: EdgeInsets.symmetric(horizontal: 2.0.w, vertical: 2.h),
       child: Card(
         child: SizedBox(
-          width: 80.w,
+          width: double.infinity,
           height: 30.h,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 3.h),
@@ -55,15 +57,53 @@ class _EventInfoCardState extends State<EventInfoCard> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Boletas disponibles'),
-                      Text('${widget.ticketsLength}')
+                      AutoSizeText(
+                        'Boletas disponibles',
+                        style: TextStyle(fontSize: 20.sp),
+                        maxLines: 1,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFD9D9D9),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 5.w, vertical: 1.h),
+                          child: AutoSizeText(
+                            '${widget.ticketsLength}',
+                            style: TextStyle(
+                              fontSize: 20.sp,
+                            ),
+                            maxLines: 1,
+                          ),
+                        ),
+                      )
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Boletas leídas'),
-                      Text('${widget.readTickets}')
+                      AutoSizeText(
+                        'Boletas leídas',
+                        style: TextStyle(fontSize: 20.sp),
+                        maxLines: 1,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFD9D9D9),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 5.w, vertical: 1.h),
+                          child: AutoSizeText(
+                            '${widget.readTickets}',
+                            style: TextStyle(
+                              fontSize: 20.sp,
+                            ),
+                            maxLines: 1,
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ]),

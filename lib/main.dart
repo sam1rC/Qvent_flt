@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
                 onError: Color(0x00000000),
                 background: Color(0xFF5F8D4E),
                 onBackground: Color(0xFF3C2A21),
-                surface: Color(0xFF3C2A21),
+                surface: Color(0xFFD9D9D9),
                 onSurface: Color(0xFF3C2A21)),
             scaffoldBackgroundColor: const Color(0xFF5F8D4E),
             appBarTheme: AppBarTheme(
@@ -59,6 +59,7 @@ class _MyAppState extends State<MyApp> {
             textTheme: const TextTheme(
               bodyMedium: TextStyle(
                 color: Color(0xFF3C2A21),
+                fontWeight: FontWeight.w500,
               ),
             ),
             elevatedButtonTheme: ElevatedButtonThemeData(
