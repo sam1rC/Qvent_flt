@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
                 padding: MaterialStateProperty.all(
-                  EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.h),
+                  EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.5.h),
                 ),
                 textStyle: MaterialStateProperty.all(
                   TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),

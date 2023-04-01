@@ -23,8 +23,13 @@ class _EventInfoPageState extends State<EventInfoPage> {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: EventInfoCard(
-          ticketsLength: tickets.length, readTickets: read_tickets),
+      body: Column(
+        children: [
+          EventInfoCard(
+              ticketsLength: tickets.length, readTickets: read_tickets),
+          TicketsButtons(),
+        ],
+      ),
     );
   }
 }
@@ -109,6 +114,39 @@ class _EventInfoCardState extends State<EventInfoCard> {
                 ]),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class TicketsButtons extends StatefulWidget {
+  const TicketsButtons({super.key});
+
+  @override
+  State<TicketsButtons> createState() => _TicketsButtonsState();
+}
+
+class _TicketsButtonsState extends State<TicketsButtons> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Generar boletas'),
+          ),
+          SizedBox(height: 2.h),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Boletas disponibles'),
+          ),
+          SizedBox(height: 2.h),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Leer boleta'),
+          )
+        ],
       ),
     );
   }
