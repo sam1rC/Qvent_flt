@@ -21,7 +21,7 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
       ),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
+          padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 5.h),
           child: Column(
             children: [
               Row(
@@ -33,7 +33,10 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
                         color: const Color(0xFFE5D9B6), fontSize: 22.sp),
                   ),
                   CupertinoButton.filled(
-                    child: Text('$ticketNumber'),
+                    child: Text(
+                      '$ticketNumber',
+                      style: const TextStyle(fontWeight: FontWeight.w600),
+                    ),
                     onPressed: () => showCupertinoModalPopup(
                       context: context,
                       builder: (_) => SizedBox(
@@ -45,7 +48,13 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
                           scrollController: FixedExtentScrollController(
                             initialItem: 0,
                           ),
-                          children: items.map((item) => Text('$item')).toList(),
+                          children: items
+                              .map((item) => Text(
+                                    '$item',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w500),
+                                  ))
+                              .toList(),
                           onSelectedItemChanged: (int value) {
                             setState(() {
                               ticketNumber = value;
