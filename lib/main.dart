@@ -5,6 +5,7 @@ import 'package:sizer/sizer.dart';
 import 'pages/home.dart';
 import 'pages/create_event.dart';
 import 'pages/event_info.dart';
+import 'pages/create_tickets.dart';
 //Firebase import
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -78,6 +79,7 @@ class _MyAppState extends State<MyApp> {
             '/': (context) => const HomePage(),
             '/create': (context) => const CreateEventPage(),
             '/event_info': (context) => const EventInfoPage(),
+            '/create_tickets': (context) => const CreateTicketsPage(),
           },
         );
       },
