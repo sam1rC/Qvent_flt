@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qvent/services/firebase_services.dart';
-import 'package:sizer/sizer.dart';
-import 'create_event.dart';
 //Services
-import '../services/firebase_services.dart';
+import 'package:qvent/services/firebase_services.dart';
 //Custom widgets
 import '../widgets/card_widget.dart';
 
