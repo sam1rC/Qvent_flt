@@ -15,6 +15,10 @@ class EventInfoPage extends StatefulWidget {
 class _EventInfoPageState extends State<EventInfoPage> {
   @override
   Widget build(BuildContext context) {
+    refresh() {
+      setState(() {});
+    }
+
     final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
     String title = arguments['name'];
     var tickets = arguments['tickets'];
@@ -29,6 +33,7 @@ class _EventInfoPageState extends State<EventInfoPage> {
           EventInfoCard(
               ticketsLength: tickets.length, readTickets: read_tickets),
           TicketsButtons(
+            notifyParent: refresh,
             tickets: tickets,
             eventId: eventId,
           )
@@ -124,8 +129,12 @@ class _EventInfoCardState extends State<EventInfoCard> {
 }
 
 class TicketsButtons extends StatefulWidget {
+  final Function() notifyParent;
   const TicketsButtons(
-      {super.key, required this.tickets, required this.eventId});
+      {super.key,
+      required this.tickets,
+      required this.eventId,
+      required this.notifyParent});
   final eventId;
   final tickets;
   @override
@@ -138,11 +147,17 @@ class _TicketsButtonsState extends State<TicketsButtons> {
     return Column(
       children: [
         ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/create_tickets', arguments: {
-              "eventId": widget.eventId,
-              "tickets": widget.tickets,
-            });
+          onPressed: () async {
+            await Navigator.pushNamed(
+              context,
+              '/create_tickets',
+              arguments: {
+                "eventId": widget.eventId,
+                "tickets": widget.tickets,
+              },
+            );
+            //update info page
+            widget.notifyParent();
           },
           child: const Text('Generar boletas'),
         ),

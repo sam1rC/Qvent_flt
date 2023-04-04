@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:qvent/services/firebase_services.dart';
 //Sizer tool
 import 'package:sizer/sizer.dart';
+//Uuid tool
+import 'package:uuid/uuid.dart';
 
 class CreateTicketsPage extends StatefulWidget {
   const CreateTicketsPage({super.key});
@@ -77,8 +80,11 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
                 height: 10.h,
               ),
               ElevatedButton(
-                  onPressed: () {
-                    print(ticketNumber);
+                  onPressed: () async {
+                    tickets = generateTickets(ticketNumber, eventId, tickets);
+                    await updateEventTickets(eventId, tickets).then((_) {
+                      Navigator.pop(context);
+                    });
                   },
                   child: const Text('Generar'))
             ],
@@ -87,4 +93,14 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
       ),
     );
   }
+}
+
+List<dynamic> generateTickets(
+    int ticketNumber, dynamic eventId, dynamic tickets) {
+  List<dynamic> updatedTickets = tickets;
+  int totalLength = ticketNumber + updatedTickets.length;
+  for (int i = updatedTickets.length; i < totalLength; i++) {
+    updatedTickets.add(const Uuid().v4());
+  }
+  return updatedTickets;
 }
