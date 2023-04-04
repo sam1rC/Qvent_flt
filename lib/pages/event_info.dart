@@ -19,6 +19,7 @@ class _EventInfoPageState extends State<EventInfoPage> {
     String title = arguments['name'];
     var tickets = arguments['tickets'];
     int read_tickets = arguments['read_tickets'];
+    dynamic eventId = arguments['uid'];
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -27,7 +28,10 @@ class _EventInfoPageState extends State<EventInfoPage> {
         children: [
           EventInfoCard(
               ticketsLength: tickets.length, readTickets: read_tickets),
-          TicketsButtons(),
+          TicketsButtons(
+            tickets: tickets,
+            eventId: eventId,
+          )
         ],
       ),
     );
@@ -120,8 +124,10 @@ class _EventInfoCardState extends State<EventInfoCard> {
 }
 
 class TicketsButtons extends StatefulWidget {
-  const TicketsButtons({super.key});
-
+  const TicketsButtons(
+      {super.key, required this.tickets, required this.eventId});
+  final eventId;
+  final tickets;
   @override
   State<TicketsButtons> createState() => _TicketsButtonsState();
 }
@@ -133,7 +139,10 @@ class _TicketsButtonsState extends State<TicketsButtons> {
       children: [
         ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/create_tickets');
+            Navigator.pushNamed(context, '/create_tickets', arguments: {
+              "eventId": widget.eventId,
+              "tickets": widget.tickets,
+            });
           },
           child: const Text('Generar boletas'),
         ),

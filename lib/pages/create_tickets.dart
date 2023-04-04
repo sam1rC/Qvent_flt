@@ -15,6 +15,9 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
   List<int> items = [for (int i = 0; i <= 200; i += 1) i];
   @override
   Widget build(BuildContext context) {
+    final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+    dynamic tickets = arguments['tickets'];
+    dynamic eventId = arguments['eventId'];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Generar boletas'),
@@ -69,7 +72,11 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
               SizedBox(
                 height: 10.h,
               ),
-              ElevatedButton(onPressed: () {}, child: Text('Generar'))
+              ElevatedButton(
+                  onPressed: () {
+                    print(ticketNumber);
+                  },
+                  child: const Text('Generar'))
             ],
           ),
         ),

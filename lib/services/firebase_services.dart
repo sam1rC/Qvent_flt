@@ -7,9 +7,17 @@ Future<List> getEvents() async {
   List events = [];
   CollectionReference collectionReferenceEvents = db.collection('events');
   QuerySnapshot queryEvents = await collectionReferenceEvents.get();
-  queryEvents.docs.forEach((document) {
-    events.add(document.data());
-  });
+  for (var doc in queryEvents.docs) {
+    final Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    final event = {
+      "date": data["date"],
+      "name": data["name"],
+      "read_tickets": data["read_tickets"],
+      "tickets": data["tickets"],
+      "uid": doc.id,
+    };
+    events.add(event);
+  }
 
   return events;
 }
@@ -19,4 +27,8 @@ Future<void> addEvent(String name, String date) async {
   await db
       .collection('events')
       .add({"name": name, "date": date, "tickets": [], "read_tickets": 0});
+}
+
+Future<void> updateEvent(String uid, List<String> tickets) async {
+  await db.collection('events').doc(uid).set({"tickets": tickets});
 }
