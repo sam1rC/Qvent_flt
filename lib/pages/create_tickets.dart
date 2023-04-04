@@ -40,32 +40,36 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
                       '$ticketNumber',
                       style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
-                    onPressed: () => showCupertinoModalPopup(
-                      context: context,
-                      builder: (_) => SizedBox(
-                        width: double.infinity,
-                        height: 250,
-                        child: CupertinoPicker(
-                          backgroundColor: Colors.white,
-                          itemExtent: 30,
-                          scrollController: FixedExtentScrollController(
-                            initialItem: 0,
+                    onPressed: () {
+                      FixedExtentScrollController(initialItem: ticketNumber);
+                      showCupertinoModalPopup(
+                        context: context,
+                        builder: (_) => SizedBox(
+                          width: double.infinity,
+                          height: 250,
+                          child: CupertinoPicker(
+                            looping: true,
+                            backgroundColor: Colors.white,
+                            itemExtent: 30,
+                            scrollController: FixedExtentScrollController(
+                              initialItem: ticketNumber,
+                            ),
+                            children: items
+                                .map((item) => Text(
+                                      '$item',
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w500),
+                                    ))
+                                .toList(),
+                            onSelectedItemChanged: (int value) {
+                              setState(() {
+                                ticketNumber = value;
+                              });
+                            },
                           ),
-                          children: items
-                              .map((item) => Text(
-                                    '$item',
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w500),
-                                  ))
-                              .toList(),
-                          onSelectedItemChanged: (int value) {
-                            setState(() {
-                              ticketNumber = value;
-                            });
-                          },
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
                 ],
               ),
