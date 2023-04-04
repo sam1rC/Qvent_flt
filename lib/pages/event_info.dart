@@ -15,6 +15,7 @@ class EventInfoPage extends StatefulWidget {
 class _EventInfoPageState extends State<EventInfoPage> {
   @override
   Widget build(BuildContext context) {
+    //this function is used to refresh the information after generate new tickets or read a ticket
     refresh() {
       setState(() {});
     }
@@ -33,7 +34,8 @@ class _EventInfoPageState extends State<EventInfoPage> {
           EventInfoCard(
               ticketsLength: tickets.length, readTickets: read_tickets),
           TicketsButtons(
-            notifyParent: refresh,
+            notifyParent:
+                refresh, //this is to notify when the tickets have been generated to refresh the info
             tickets: tickets,
             eventId: eventId,
           )
@@ -129,7 +131,7 @@ class _EventInfoCardState extends State<EventInfoCard> {
 }
 
 class TicketsButtons extends StatefulWidget {
-  final Function() notifyParent;
+  final Function() notifyParent; //This function refresh the parent widget
   const TicketsButtons(
       {super.key,
       required this.tickets,
