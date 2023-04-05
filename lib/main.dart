@@ -82,11 +82,7 @@ class _MyAppState extends State<MyApp> {
             '/create': (context) => const CreateEventPage(),
             '/event_info': (context) => const EventInfoPage(),
             '/create_tickets': (context) => const CreateTicketsPage(),
-<<<<<<< HEAD
-            '/generated_tickets': (context) => const GeneratedTicketsPage(),
-=======
             '/available_tickets': (context) => const AvailableTicketsPage(),
->>>>>>> display_tickets
           },
         );
       },
