@@ -21,32 +21,6 @@ class _GeneratedTicketsPageState extends State<GeneratedTicketsPage> {
       appBar: AppBar(
         title: Text('Boletas disponibles'),
       ),
-      body: FutureBuilder(
-        future: getEvents(),
-        builder: ((context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: snapshot.data?.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/event_info', arguments: {
-                      "name": snapshot.data?[index]['name'],
-                      "tickets": snapshot.data?[index]['tickets'],
-                      "read_tickets": snapshot.data?[index]['read_tickets'],
-                    });
-                  },
-                  child: CardWidget(title: snapshot.data?[index]['name']),
-                );
-              },
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        }),
-      ),
     );
   }
 }
