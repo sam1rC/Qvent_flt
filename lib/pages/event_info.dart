@@ -165,7 +165,11 @@ class _TicketsButtonsState extends State<TicketsButtons> {
         ),
         SizedBox(height: 2.h),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/available_tickets', arguments: {
+              "tickets": widget.tickets,
+            });
+          },
           child: const Text('Boletas disponibles'),
         ),
         SizedBox(height: 2.h),
