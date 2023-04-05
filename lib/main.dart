@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qvent/pages/event_info.dart';
+import 'package:qvent/pages/generated_tickets.dart';
 import 'package:sizer/sizer.dart';
 //Pages
 import 'pages/home.dart';
@@ -80,6 +81,7 @@ class _MyAppState extends State<MyApp> {
             '/create': (context) => const CreateEventPage(),
             '/event_info': (context) => const EventInfoPage(),
             '/create_tickets': (context) => const CreateTicketsPage(),
+            '/generated_tickets': (context) => const GeneratedTicketsPage(),
           },
         );
       },

@@ -146,9 +146,11 @@ class TicketsButtons extends StatefulWidget {
 class _TicketsButtonsState extends State<TicketsButtons> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ElevatedButton(
+    return Container(
+      child: Column(
+        children: [
+          SizedBox(height: 2.h),
+          ElevatedButton(
           onPressed: () async {
             await Navigator.pushNamed(
               context,
@@ -163,17 +165,24 @@ class _TicketsButtonsState extends State<TicketsButtons> {
           },
           child: const Text('Generar boletas'),
         ),
-        SizedBox(height: 2.h),
-        ElevatedButton(
-          onPressed: () {},
+          SizedBox(height: 2.h),
+          ElevatedButton(
+          onPressed: () async {
+            await Navigator.pushNamed(
+              context,
+              '/generated_tickets',
+            );
+            //update info page
+          },
           child: const Text('Boletas disponibles'),
         ),
-        SizedBox(height: 2.h),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Leer boleta'),
-        )
-      ],
+          SizedBox(height: 2.h),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Leer boleta'),
+          )
+        ],
+      ),
     );
   }
 }
