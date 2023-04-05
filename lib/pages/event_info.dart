@@ -132,15 +132,22 @@ class _TicketsButtonsState extends State<TicketsButtons> {
     return Container(
       child: Column(
         children: [
+          SizedBox(height: 2.h),
           ElevatedButton(
             onPressed: () {},
             child: Text('Generar boletas'),
           ),
           SizedBox(height: 2.h),
           ElevatedButton(
-            onPressed: () {},
-            child: Text('Boletas disponibles'),
-          ),
+          onPressed: () async {
+            await Navigator.pushNamed(
+              context,
+              '/generated_tickets',
+            );
+            //update info page
+          },
+          child: const Text('Boletas disponibles'),
+        ),
           SizedBox(height: 2.h),
           ElevatedButton(
             onPressed: () {},
