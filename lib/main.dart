@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qvent/pages/event_info.dart';
 import 'package:qvent/pages/generated_tickets.dart';
+import 'package:qvent/pages/read_tickets.dart';
 import 'package:sizer/sizer.dart';
 //Pages
 import 'pages/home.dart';
@@ -8,6 +9,7 @@ import 'pages/create_event.dart';
 import 'pages/event_info.dart';
 import 'pages/create_tickets.dart';
 import 'pages/available_tickets.dart';
+import 'pages/read_tickets.dart';
 //Firebase import
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -83,6 +85,7 @@ class _MyAppState extends State<MyApp> {
             '/event_info': (context) => const EventInfoPage(),
             '/create_tickets': (context) => const CreateTicketsPage(),
             '/available_tickets': (context) => const AvailableTicketsPage(),
+            '/read_tickets': (context) => const ReadTicketsPage(),
           },
         );
       },
