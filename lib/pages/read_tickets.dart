@@ -15,10 +15,22 @@ class ReadTicketsPage extends StatefulWidget {
 
 class _ReadTicketsPageState extends State<ReadTicketsPage> {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(
-        title: Text('Leer Boletas'),
+  Widget build(BuildContext context) => SafeArea(
+    child: Scaffold(
+      appBar: AppBar(
+        title: const Text('Generar boletas'),
       ),
-    );
-  }
+      body: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          buildQrView(context),
+        ],
+      ),
+    ),
+  );
+
+  Widget buildQrView(BuildContext context) => QRView(
+    key: qrKey,
+  );
 }
+
