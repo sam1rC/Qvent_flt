@@ -29,9 +29,15 @@ Future<void> addEvent(String name, String date) async {
       .add({"name": name, "date": date, "tickets": [], "read_tickets": 0});
 }
 
+//add tickets to the event
 Future<void> updateEventTickets(String uid, List<dynamic> tickets) async {
   await db
       .collection('events')
       .doc(uid)
       .set({"tickets": tickets}, SetOptions(merge: true));
+}
+
+//delete event
+Future<void> deleteEvent(String uid) async {
+  await db.collection('events').doc(uid).delete();
 }

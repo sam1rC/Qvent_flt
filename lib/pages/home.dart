@@ -39,6 +39,10 @@ class _HomePageState extends State<HomePage> {
                 itemCount: snapshot.data?.length,
                 itemBuilder: (context, index) {
                   return Dismissible(
+                    onDismissed: (direction) async {
+                      await deleteEvent(snapshot.data?[index]['uid']);
+                      snapshot.data?.removeAt(index);
+                    },
                     confirmDismiss: (direction) async {
                       bool result = false;
 
@@ -54,16 +58,16 @@ class _HomePageState extends State<HomePage> {
                                     return Navigator.pop(context, false);
                                   },
                                   child: const Text('Cancelar',
-                                      style:
-                                          TextStyle(color: Color(0xFF3C2A21))),
+                                      style: TextStyle(color: Colors.red)),
                                 ),
                                 TextButton(
                                   onPressed: () {
                                     return Navigator.pop(context, true);
                                   },
-                                  child: const Text('Confirmar',
-                                      style:
-                                          TextStyle(color: Color(0xFF3C2A21))),
+                                  child: const Text(
+                                    'Confirmar',
+                                    style: TextStyle(color: Colors.green),
+                                  ),
                                 )
                               ],
                             );
