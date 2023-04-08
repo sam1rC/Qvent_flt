@@ -38,16 +38,56 @@ class _HomePageState extends State<HomePage> {
               return ListView.builder(
                 itemCount: snapshot.data?.length,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/event_info', arguments: {
-                        "name": snapshot.data?[index]['name'],
-                        "tickets": snapshot.data?[index]['tickets'],
-                        "read_tickets": snapshot.data?[index]['read_tickets'],
-                        "uid": snapshot.data?[index]['uid'],
-                      });
+                  return Dismissible(
+                    confirmDismiss: (direction) async {
+                      bool result = false;
+
+                      result = await showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text(
+                                  "Vas a eliminar el evento ${snapshot.data?[index]['name']}"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    return Navigator.pop(context, false);
+                                  },
+                                  child: const Text('Cancelar',
+                                      style:
+                                          TextStyle(color: Color(0xFF3C2A21))),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    return Navigator.pop(context, true);
+                                  },
+                                  child: const Text('Confirmar',
+                                      style:
+                                          TextStyle(color: Color(0xFF3C2A21))),
+                                )
+                              ],
+                            );
+                          });
+
+                      return result;
                     },
-                    child: CardWidget(title: snapshot.data?[index]['name']),
+                    background: Container(
+                      color: Colors.red,
+                      child: const Icon(Icons.delete),
+                    ),
+                    direction: DismissDirection.startToEnd,
+                    key: Key(snapshot.data?[index]['uid']),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/event_info', arguments: {
+                          "name": snapshot.data?[index]['name'],
+                          "tickets": snapshot.data?[index]['tickets'],
+                          "read_tickets": snapshot.data?[index]['read_tickets'],
+                          "uid": snapshot.data?[index]['uid'],
+                        });
+                      },
+                      child: CardWidget(title: snapshot.data?[index]['name']),
+                    ),
                   );
                 },
               );
