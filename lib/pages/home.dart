@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //Services
 import 'package:qvent/services/firebase_services.dart';
@@ -29,32 +30,34 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: FutureBuilder(
-        future: getEvents(),
-        builder: ((context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: snapshot.data?.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/event_info', arguments: {
-                      "name": snapshot.data?[index]['name'],
-                      "tickets": snapshot.data?[index]['tickets'],
-                      "read_tickets": snapshot.data?[index]['read_tickets'],
-                      "uid": snapshot.data?[index]['uid'],
-                    });
-                  },
-                  child: CardWidget(title: snapshot.data?[index]['name']),
-                );
-              },
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        }),
+      body: SafeArea(
+        child: FutureBuilder(
+          future: getEvents(),
+          builder: ((context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: snapshot.data?.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/event_info', arguments: {
+                        "name": snapshot.data?[index]['name'],
+                        "tickets": snapshot.data?[index]['tickets'],
+                        "read_tickets": snapshot.data?[index]['read_tickets'],
+                        "uid": snapshot.data?[index]['uid'],
+                      });
+                    },
+                    child: CardWidget(title: snapshot.data?[index]['name']),
+                  );
+                },
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          }),
+        ),
       ),
     );
   }

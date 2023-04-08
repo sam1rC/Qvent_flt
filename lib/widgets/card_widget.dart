@@ -21,8 +21,14 @@ class CardWidget extends StatelessWidget {
             width: double.infinity,
             height: 5.h,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(title),
+                PopupMenuButton(
+                  icon: const Icon(Icons.more_horiz),
+                  itemBuilder: (context) =>
+                      [PopupMenuItem(child: Text('Eliminar'))],
+                ),
               ],
             ),
           ),
