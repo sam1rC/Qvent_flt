@@ -38,6 +38,7 @@ class _EventInfoPageState extends State<EventInfoPage> {
                 refresh, //this is to notify when the tickets have been generated to refresh the info
             tickets: tickets,
             eventId: eventId,
+            read_tickets: read_tickets,
           )
         ],
       ),
@@ -136,9 +137,11 @@ class TicketsButtons extends StatefulWidget {
       {super.key,
       required this.tickets,
       required this.eventId,
+      required this.read_tickets,
       required this.notifyParent});
   final eventId;
   final tickets;
+  final read_tickets;
   @override
   State<TicketsButtons> createState() => _TicketsButtonsState();
 }
@@ -176,8 +179,11 @@ class _TicketsButtonsState extends State<TicketsButtons> {
         SizedBox(height: 2.h),
         ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/read_tickets', arguments: {
+            Navigator.pushNamed(context, '/read_tickets', 
+            arguments: {
+              "eventId": widget.eventId,
               "tickets": widget.tickets,
+              "read:tickets": widget.read_tickets,
             });
           },
           child: const Text('Leer Boletas'),

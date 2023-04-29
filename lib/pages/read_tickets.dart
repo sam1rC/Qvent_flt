@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:qvent/services/firebase_services.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -37,8 +36,14 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
   }
 
   @override
-  Widget build(BuildContext context) => SafeArea(
-    child: Scaffold(
+  Widget build(BuildContext context) {
+    final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+    dynamic tickets = arguments['tickets'];
+    dynamic read_tickets= arguments['read_tickets'];
+    dynamic eventId = arguments['eventId'];
+    var safeArea = SafeArea(
+    child: 
+    Scaffold(
       appBar: AppBar(
         title: const Text('Generar boletas'),
       ),
@@ -51,9 +56,11 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
       ),
     ),
   );
+    return safeArea;
+  }
 
   Widget buildResult() => Container(
-    padding: EdgeInsets.all(12),
+    padding: const EdgeInsets.all(12),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8),
       color:Colors.white24,
@@ -84,5 +91,19 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
       .listen((barcode) => setState(() => this.barcode = barcode));
 
   }
+
+bool findTicket(String ticketNumber, dynamic tickets) {
+  List<dynamic> listTickets = tickets;
+  return listTickets.contains(ticketNumber);
 }
+
+List<dynamic> deleteTicket(String ticketNumber, dynamic tickets) {
+  List<dynamic> updatedTickets = tickets;
+  updatedTickets.remove(ticketNumber);
+  return updatedTickets;
+}
+
+}
+
+
 

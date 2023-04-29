@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -40,4 +41,9 @@ Future<void> updateEventTickets(String uid, List<dynamic> tickets) async {
 //delete event
 Future<void> deleteEvent(String uid) async {
   await db.collection('events').doc(uid).delete();
+}
+
+Future<void> addOneReadTicket(String uid, int read_tickets, String ticket) async {
+  await db.collection('events').doc(uid).set({"read_tickets": read_tickets}, SetOptions(merge: true));
+
 }
