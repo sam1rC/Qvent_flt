@@ -175,8 +175,12 @@ class _TicketsButtonsState extends State<TicketsButtons> {
         ),
         SizedBox(height: 2.h),
         ElevatedButton(
-          onPressed: () {},
-          child: const Text('Leer boleta'),
+          onPressed: () {
+            Navigator.pushNamed(context, '/read_tickets', arguments: {
+              "tickets": widget.tickets,
+            });
+          },
+          child: const Text('Leer Boletas'),
         )
       ],
     );
