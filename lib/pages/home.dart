@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () async {
               await Navigator.pushNamed(context, '/create');
               //update the home page
-              setState(() {});
+              setState(() {events = getEvents();});
             },
             icon: const Icon(Icons.add_circle_outlined),
           ),
