@@ -113,6 +113,7 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
         ticketExists = findTicket(barcode.code, tickets);
         deleteTicket(barcode.code, tickets);
         updateEventTickets(eventId, tickets);
+        controller.pauseCamera();
         showDialog(
             context: context,
             builder: (context) {
@@ -122,6 +123,7 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
                     actions: [
                       TextButton(
                         onPressed: () {
+                          controller.resumeCamera();
                           return Navigator.pop(context, false);
                         },
                         child: const Text('Aceptar',
@@ -134,6 +136,7 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
                     actions: [
                       TextButton(
                         onPressed: () {
+                          controller.resumeCamera();
                           return Navigator.pop(context, false);
                         },
                         child: const Text('Aceptar',
