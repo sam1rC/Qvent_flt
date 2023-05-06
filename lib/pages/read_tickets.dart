@@ -69,7 +69,7 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
           color: Colors.white24,
         ),
         child: Text(
-          ticketExists == true
+          ticketExists
               ? 'Boleta leída con éxito'
               : 'Boleta no encontrada',
           maxLines: 3,
@@ -111,4 +111,5 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
     updatedTickets.remove(ticketNumber);
     return updatedTickets;
   }
+  
 }
