@@ -54,7 +54,7 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
           alignment: Alignment.center,
           children: <Widget>[
             buildQrView(context),
-            Positioned(bottom: 10, child: buildResult()),
+            //Positioned(bottom: 10, child: buildResult()),
           ],
         ),
       ),
@@ -62,6 +62,7 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
     return safeArea;
   }
 
+<<<<<<< HEAD
   Widget buildResult() => Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
@@ -75,6 +76,37 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
           maxLines: 3,
         ),
       );
+=======
+  /*Widget buildResult() async => await showDialog(
+      context: context,
+      builder: (context) {
+        if (ticketExists) {
+          return AlertDialog(
+              title: const Text("Boleta leída con éxito"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    return Navigator.pop(context, false);
+                  },
+                  child: const Text('Cancelar',
+                      style: TextStyle(color: Colors.red)),
+                )
+              ]);
+        } else {
+          return AlertDialog(
+              title: const Text("La boleta no existe o ya fue leída"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    return Navigator.pop(context, false);
+                  },
+                  child: const Text('Cancelar',
+                      style: TextStyle(color: Colors.red)),
+                )
+              ]);
+        }
+      });*/
+>>>>>>> cdcbc66b0d6ca60865198366f51cc16c2b3141c0
 
   Widget buildQrView(BuildContext context) => QRView(
         key: qrKey,
@@ -97,6 +129,35 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
         ticketExists = findTicket(barcode.code, tickets);
         deleteTicket(barcode.code, tickets);
         updateEventTickets(eventId, tickets);
+        showDialog(
+            context: context,
+            builder: (context) {
+              if (ticketExists) {
+                return AlertDialog(
+                    title: const Text("Boleta leída con éxito"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          return Navigator.pop(context, false);
+                        },
+                        child: const Text('Aceptar',
+                            style: TextStyle(color: Colors.green)),
+                      )
+                    ]);
+              } else {
+                return AlertDialog(
+                    title: const Text("La boleta no existe o ya fue leída"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          return Navigator.pop(context, false);
+                        },
+                        child: const Text('Aceptar',
+                            style: TextStyle(color: Colors.green)),
+                      )
+                    ]);
+              }
+            });
       }),
     );
   }
