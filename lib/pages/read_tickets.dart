@@ -19,7 +19,7 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
   dynamic tickets;
   dynamic eventId;
   dynamic read_tickets;
-  late bool ticketExists;
+  late bool ticketExists = false;
   @override
   void dispose() {
     controller?.dispose();
