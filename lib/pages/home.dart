@@ -35,65 +35,70 @@ class _HomePageState extends State<HomePage> {
           future: getEvents(),
           builder: ((context, snapshot) {
             if (snapshot.hasData) {
-              return ListView.builder(
-                itemCount: snapshot.data?.length,
-                itemBuilder: (context, index) {
-                  return Dismissible(
-                    onDismissed: (direction) async {
-                      await deleteEvent(snapshot.data?[index]['uid']);
-                      snapshot.data?.removeAt(index);
-                    },
-                    confirmDismiss: (direction) async {
-                      bool result = false;
-
-                      result = await showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text(
-                                  "Vas a eliminar el evento ${snapshot.data?[index]['name']}"),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    return Navigator.pop(context, false);
-                                  },
-                                  child: const Text('Cancelar',
-                                      style: TextStyle(color: Colors.red)),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    return Navigator.pop(context, true);
-                                  },
-                                  child: const Text(
-                                    'Confirmar',
-                                    style: TextStyle(color: Colors.green),
-                                  ),
-                                )
-                              ],
-                            );
-                          });
-
-                      return result;
-                    },
-                    background: Container(
-                      color: Colors.red,
-                      child: const Icon(Icons.delete),
-                    ),
-                    direction: DismissDirection.startToEnd,
-                    key: Key(snapshot.data?[index]['uid']),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/event_info', arguments: {
-                          "name": snapshot.data?[index]['name'],
-                          "tickets": snapshot.data?[index]['tickets'],
-                          "read_tickets": snapshot.data?[index]['read_tickets'],
-                          "uid": snapshot.data?[index]['uid'],
-                        });
+              return RefreshIndicator(
+                onRefresh: getEvents,
+                child: ListView.builder(
+                  itemCount: snapshot.data?.length,
+                  itemBuilder: (context, index) {
+                    return Dismissible(
+                      onDismissed: (direction) async {
+                        await deleteEvent(snapshot.data?[index]['uid']);
+                        snapshot.data?.removeAt(index);
                       },
-                      child: CardWidget(title: snapshot.data?[index]['name']),
-                    ),
-                  );
-                },
+                      confirmDismiss: (direction) async {
+                        bool result = false;
+
+                        result = await showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text(
+                                    "Vas a eliminar el evento ${snapshot.data?[index]['name']}"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      return Navigator.pop(context, false);
+                                    },
+                                    child: const Text('Cancelar',
+                                        style: TextStyle(color: Colors.red)),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      return Navigator.pop(context, true);
+                                    },
+                                    child: const Text(
+                                      'Confirmar',
+                                      style: TextStyle(color: Colors.green),
+                                    ),
+                                  )
+                                ],
+                              );
+                            });
+
+                        return result;
+                      },
+                      background: Container(
+                        color: Colors.red,
+                        child: const Icon(Icons.delete),
+                      ),
+                      direction: DismissDirection.startToEnd,
+                      key: Key(snapshot.data?[index]['uid']),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/event_info',
+                              arguments: {
+                                "name": snapshot.data?[index]['name'],
+                                "tickets": snapshot.data?[index]['tickets'],
+                                "read_tickets": snapshot.data?[index]
+                                    ['read_tickets'],
+                                "uid": snapshot.data?[index]['uid'],
+                              });
+                        },
+                        child: CardWidget(title: snapshot.data?[index]['name']),
+                      ),
+                    );
+                  },
+                ),
               );
             } else {
               return const Center(
