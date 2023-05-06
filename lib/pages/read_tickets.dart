@@ -62,22 +62,7 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
     return safeArea;
   }
 
-<<<<<<< HEAD
-  Widget buildResult() => Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Colors.white24,
-        ),
-        child: Text(
-          ticketExists
-              ? 'Boleta leída con éxito'
-              : 'Boleta no encontrada',
-          maxLines: 3,
-        ),
-      );
-=======
-  /*Widget buildResult() async => await showDialog(
+  Widget buildResult() async => await showDialog(
       context: context,
       builder: (context) {
         if (ticketExists) {
@@ -105,8 +90,7 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
                 )
               ]);
         }
-      });*/
->>>>>>> cdcbc66b0d6ca60865198366f51cc16c2b3141c0
+      });
 
   Widget buildQrView(BuildContext context) => QRView(
         key: qrKey,
