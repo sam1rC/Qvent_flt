@@ -62,7 +62,7 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
     return safeArea;
   }
 
-  Widget buildResult() async => await showDialog(
+  Future<Widget> buildResult() async => await showDialog(
       context: context,
       builder: (context) {
         if (ticketExists) {
