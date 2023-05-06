@@ -6,13 +6,20 @@ import 'package:qvent/services/firebase_services.dart';
 import '../widgets/card_widget.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  late Future events;
+  @override
+  void initState() {
+    super.initState();
+    events = getEvents();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,11 +39,11 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SafeArea(
         child: FutureBuilder(
-          future: getEvents(),
+          future: events,
           builder: ((context, snapshot) {
             if (snapshot.hasData) {
               return RefreshIndicator(
-                onRefresh: getEvents,
+                onRefresh: _pullRefresh,
                 child: ListView.builder(
                   itemCount: snapshot.data?.length,
                   itemBuilder: (context, index) {
@@ -109,5 +116,12 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Future<void> _pullRefresh() async {
+    Future newEvents = getEvents();
+    setState(() {
+      events = newEvents;
+    });
   }
 }
