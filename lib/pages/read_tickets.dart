@@ -69,7 +69,9 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
           color: Colors.white24,
         ),
         child: Text(
-          barcode != null ? 'Result : ${barcode!.code}' : 'Scan a code!',
+          ticketExists == true
+              ? 'Boleta leída con éxito'
+              : 'Boleta no encontrada',
           maxLines: 3,
         ),
       );
