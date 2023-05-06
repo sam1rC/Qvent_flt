@@ -6,7 +6,7 @@ import 'package:qvent/services/firebase_services.dart';
 import '../widgets/card_widget.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -31,7 +31,9 @@ class _HomePageState extends State<HomePage> {
             onPressed: () async {
               await Navigator.pushNamed(context, '/create');
               //update the home page
-              setState(() {events = getEvents();});
+              setState(() {
+                events = getEvents();
+              });
             },
             icon: const Icon(Icons.add_circle_outlined),
           ),

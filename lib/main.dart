@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
           ),
           initialRoute: '/',
           routes: {
-            '/': (context) => HomePage(),
+            '/': (context) => const HomePage(),
             '/create': (context) => const CreateEventPage(),
             '/event_info': (context) => const EventInfoPage(),
             '/create_tickets': (context) => const CreateTicketsPage(),
