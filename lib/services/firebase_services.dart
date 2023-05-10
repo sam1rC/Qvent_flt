@@ -24,10 +24,14 @@ Future<List> getEvents() async {
 }
 
 //Add name to database
-Future<void> addEvent(String name, String date) async {
-  await db
-      .collection('events')
-      .add({"name": name, "date": date, "tickets": [], "read_tickets": 0});
+Future<void> addEvent(String name, String date, String capacity) async {
+  await db.collection('events').add({
+    "name": name,
+    "date": date,
+    "capacity": capacity,
+    "tickets": [],
+    "read_tickets": 0
+  });
 }
 
 //add tickets to the event
@@ -43,7 +47,10 @@ Future<void> deleteEvent(String uid) async {
   await db.collection('events').doc(uid).delete();
 }
 
-Future<void> addOneReadTicket(String uid, int read_tickets, String ticket) async {
-  await db.collection('events').doc(uid).set({"read_tickets": read_tickets}, SetOptions(merge: true));
-
+Future<void> addOneReadTicket(
+    String uid, int read_tickets, String ticket) async {
+  await db
+      .collection('events')
+      .doc(uid)
+      .set({"read_tickets": read_tickets}, SetOptions(merge: true));
 }

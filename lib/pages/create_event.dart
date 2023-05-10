@@ -29,6 +29,7 @@ class EventCreationForm extends StatefulWidget {
 
 TextEditingController dateController = TextEditingController(text: "");
 TextEditingController nameController = TextEditingController(text: "");
+TextEditingController capacityController = TextEditingController(text: "");
 
 class _EventCreationFormState extends State<EventCreationForm> {
   @override
@@ -42,11 +43,14 @@ class _EventCreationFormState extends State<EventCreationForm> {
               SizedBox(height: 3.h),
               const EventNameWidget(),
               SizedBox(height: 3.h),
+              const CapacityWidget(),
               const EventDateWidget(),
+              SizedBox(height: 5.h),
               SizedBox(height: 5.h),
               ElevatedButton(
                 onPressed: () async {
-                  await addEvent(nameController.text, dateController.text)
+                  await addEvent(nameController.text, dateController.text,
+                          capacityController.text)
                       .then((_) {
                     Navigator.pop(context);
                   });
@@ -111,6 +115,24 @@ class _EventDateWidgetState extends State<EventDateWidget> {
           );
         }
       },
+    );
+  }
+}
+
+class CapacityWidget extends StatefulWidget {
+  const CapacityWidget({super.key});
+
+  @override
+  State<CapacityWidget> createState() => _CapacityWidgetState();
+}
+
+class _CapacityWidgetState extends State<CapacityWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: capacityController,
+      decoration: const InputDecoration(
+          border: OutlineInputBorder(), hintText: 'Aforo'),
     );
   }
 }
