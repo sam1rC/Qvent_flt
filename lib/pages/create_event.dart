@@ -133,6 +133,7 @@ class _CapacityWidgetState extends State<CapacityWidget> {
       controller: capacityController,
       decoration: const InputDecoration(
           border: OutlineInputBorder(), hintText: 'Aforo'),
+      keyboardType: TextInputType.number,
     );
   }
 }
