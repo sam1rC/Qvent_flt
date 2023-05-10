@@ -25,10 +25,11 @@ Future<List> getEvents() async {
 
 //Add name to database
 Future<void> addEvent(String name, String date, String capacity) async {
+  int formatedCapacity = int.parse(capacity);
   await db.collection('events').add({
     "name": name,
     "date": date,
-    "capacity": capacity,
+    "capacity": formatedCapacity,
     "tickets": [],
     "read_tickets": 0
   });
