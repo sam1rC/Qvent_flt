@@ -16,10 +16,11 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
   final qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? barcode;
   QRViewController? controller;
-  dynamic tickets;
+  dynamic ticketsGen;
+  dynamic ticketsPref;
   dynamic eventId;
   dynamic read_tickets;
-  late bool ticketExists = false;
+  late String ticketExists = 'null';
   @override
   void dispose() {
     controller?.dispose();
@@ -39,10 +40,12 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
-    dynamic tickets_argument = arguments['tickets'];
+    dynamic ticketsGen_argument = arguments['ticketsGen'];
     dynamic read_tickets_argument = arguments['read_tickets'];
     dynamic eventId_argument = arguments['eventId'];
-    tickets = tickets_argument;
+    dynamic ticketsPref_argument = arguments['ticketsPref'];
+    ticketsGen = ticketsGen_argument;
+    ticketsPref = ticketsPref_argument;
     read_tickets = read_tickets_argument;
     eventId = eventId_argument;
     var safeArea = SafeArea(
@@ -110,9 +113,9 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
     controller.scannedDataStream.listen(
       (barcode) => setState(() {
         this.barcode = barcode;
-        ticketExists = findTicket(barcode.code, tickets);
-        deleteTicket(barcode.code, tickets);
-        updateEventTickets(eventId, tickets);
+        ticketExists =
+            findTicket(barcode.code, ticketsGen, ticketsPref, barcode, eventId);
+
         controller.pauseCamera();
         showDialog(
             context: context,
@@ -149,9 +152,21 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
     );
   }
 
-  bool findTicket(String? ticketNumber, dynamic tickets) {
-    List<dynamic> listTickets = tickets;
-    return listTickets.contains(ticketNumber);
+  String findTicket(String? ticketNumber, dynamic ticketsGen,
+      dynamic ticketsPref, dynamic barcode, dynamic eventId) {
+    List<dynamic> listTickets = ticketsGen;
+    List<dynamic> listTicketsPref = ticketsPref;
+    if (listTickets.contains(ticketNumber)) {
+      deleteTicket(barcode.code, ticketsGen);
+      updateEventTickets(eventId, ticketsGen);
+      return "Gen";
+    } else if (listTicketsPref.contains(ticketNumber)) {
+      deleteTicket(barcode.code, ticketsPref);
+      updateEventTickets(eventId, ticketsPref);
+      return "Pref";
+    } else {
+      return "null";
+    }
   }
 
   List<dynamic> deleteTicket(String? ticketNumber, dynamic tickets) {
@@ -159,5 +174,4 @@ class _ReadTicketsPageState extends State<ReadTicketsPage> {
     updatedTickets.remove(ticketNumber);
     return updatedTickets;
   }
-  
 }

@@ -211,7 +211,8 @@ class _TicketsButtonsState extends State<TicketsButtons> {
           onPressed: () {
             Navigator.pushNamed(context, '/read_tickets', arguments: {
               "eventId": widget.eventId,
-              "tickets": widget.ticketsGen,
+              "ticketsGen": widget.ticketsGen,
+              "ticketsPref": widget.ticketsPref,
               "read:tickets": widget.read_tickets,
             });
           },
