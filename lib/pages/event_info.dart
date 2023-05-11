@@ -47,7 +47,9 @@ class _EventInfoPageState extends State<EventInfoPage> {
             height: 5.h,
           ),
           Text(
-              "Te queda disponible el ${(100 - (tickets.length / capacity) * 100)}% del aforo"),
+            "Te queda disponible el ${(100 - (tickets.length / capacity) * 100)}% del aforo",
+            style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
+          ),
         ],
       ),
     );

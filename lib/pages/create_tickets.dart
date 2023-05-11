@@ -15,13 +15,14 @@ class CreateTicketsPage extends StatefulWidget {
 
 class _CreateTicketsPageState extends State<CreateTicketsPage> {
   int ticketNumber = 0;
-  List<int> items = [for (int i = 0; i <= 500; i += 1) i];
+
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
     dynamic tickets = arguments['tickets'];
     dynamic eventId = arguments['eventId'];
     dynamic capacity = arguments['capacity'];
+    List<int> items = [for (int i = 0; i <= capacity; i += 1) i];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Generar boletas'),
