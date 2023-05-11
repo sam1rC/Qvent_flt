@@ -46,7 +46,6 @@ class _EventCreationFormState extends State<EventCreationForm> {
               const CapacityWidget(),
               const EventDateWidget(),
               SizedBox(height: 5.h),
-              SizedBox(height: 5.h),
               ElevatedButton(
                 onPressed: () async {
                   await addEvent(nameController.text, dateController.text,

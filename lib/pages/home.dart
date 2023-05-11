@@ -101,6 +101,7 @@ class _HomePageState extends State<HomePage> {
                                 "read_tickets": snapshot.data?[index]
                                     ['read_tickets'],
                                 "uid": snapshot.data?[index]['uid'],
+                                "capacity": snapshot.data?[index]['capacity'],
                               });
                         },
                         child: CardWidget(title: snapshot.data?[index]['name']),

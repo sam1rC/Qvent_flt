@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qvent/services/firebase_services.dart';
 //Sizer tool
 import 'package:sizer/sizer.dart';
 //AutoSize Text tool
@@ -25,6 +26,7 @@ class _EventInfoPageState extends State<EventInfoPage> {
     var tickets = arguments['tickets'];
     int read_tickets = arguments['read_tickets'];
     dynamic eventId = arguments['uid'];
+    int capacity = arguments['capacity'];
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -39,7 +41,13 @@ class _EventInfoPageState extends State<EventInfoPage> {
             tickets: tickets,
             eventId: eventId,
             read_tickets: read_tickets,
-          )
+            capacity: capacity,
+          ),
+          SizedBox(
+            height: 5.h,
+          ),
+          Text(
+              "Te queda disponible el ${(100 - (tickets.length / capacity) * 100)}% del aforo"),
         ],
       ),
     );
@@ -89,7 +97,7 @@ class _EventInfoCardState extends State<EventInfoCard> {
                           child: AutoSizeText(
                             '${widget.ticketsLength}',
                             style: TextStyle(
-                              fontSize: 20.sp,
+                              fontSize: 15.sp,
                             ),
                             maxLines: 1,
                           ),
@@ -115,7 +123,7 @@ class _EventInfoCardState extends State<EventInfoCard> {
                           child: AutoSizeText(
                             '${widget.readTickets}',
                             style: TextStyle(
-                              fontSize: 20.sp,
+                              fontSize: 15.sp,
                             ),
                             maxLines: 1,
                           ),
@@ -138,10 +146,12 @@ class TicketsButtons extends StatefulWidget {
       required this.tickets,
       required this.eventId,
       required this.read_tickets,
+      required this.capacity,
       required this.notifyParent});
   final eventId;
   final tickets;
   final read_tickets;
+  final capacity;
   @override
   State<TicketsButtons> createState() => _TicketsButtonsState();
 }
@@ -160,6 +170,7 @@ class _TicketsButtonsState extends State<TicketsButtons> {
               arguments: {
                 "eventId": widget.eventId,
                 "tickets": widget.tickets,
+                "capacity": widget.capacity,
               },
             );
             //update info page
@@ -179,8 +190,7 @@ class _TicketsButtonsState extends State<TicketsButtons> {
         SizedBox(height: 2.h),
         ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/read_tickets', 
-            arguments: {
+            Navigator.pushNamed(context, '/read_tickets', arguments: {
               "eventId": widget.eventId,
               "tickets": widget.tickets,
               "read:tickets": widget.read_tickets,

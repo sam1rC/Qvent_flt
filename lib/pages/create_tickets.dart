@@ -15,12 +15,13 @@ class CreateTicketsPage extends StatefulWidget {
 
 class _CreateTicketsPageState extends State<CreateTicketsPage> {
   int ticketNumber = 0;
-  List<int> items = [for (int i = 0; i <= 200; i += 1) i];
+  List<int> items = [for (int i = 0; i <= 500; i += 1) i];
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
     dynamic tickets = arguments['tickets'];
     dynamic eventId = arguments['eventId'];
+    dynamic capacity = arguments['capacity'];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Generar boletas'),
@@ -81,10 +82,29 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
               ),
               ElevatedButton(
                   onPressed: () async {
-                    tickets = generateTickets(ticketNumber, eventId, tickets);
-                    await updateEventTickets(eventId, tickets).then((_) {
-                      Navigator.pop(context);
-                    });
+                    if (ticketNumber + tickets.length > capacity) {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                                title: const Text(
+                                    "Las boletas no pueden sobrepasar el aforo"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      return Navigator.pop(context, false);
+                                    },
+                                    child: const Text('Aceptar',
+                                        style: TextStyle(color: Colors.green)),
+                                  )
+                                ]);
+                          });
+                    } else {
+                      tickets = generateTickets(ticketNumber, eventId, tickets);
+                      await updateEventTickets(eventId, tickets).then((_) {
+                        Navigator.pop(context);
+                      });
+                    }
                   },
                   child: const Text('Generar'))
             ],

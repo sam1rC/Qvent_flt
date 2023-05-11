@@ -16,6 +16,7 @@ Future<List> getEvents() async {
       "read_tickets": data["read_tickets"],
       "tickets": data["tickets"],
       "uid": doc.id,
+      "capacity": doc["capacity"],
     };
     events.add(event);
   }
