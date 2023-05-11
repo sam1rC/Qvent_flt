@@ -15,7 +15,8 @@ class CreateTicketsPage extends StatefulWidget {
 
 class _CreateTicketsPageState extends State<CreateTicketsPage> {
   int ticketNumber = 0;
-
+  List<String> ticketTypes = ['Preferencial', 'General'];
+  String? selectedTicketType = 'General';
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
@@ -24,8 +25,7 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
     dynamic eventId = arguments['eventId'];
     dynamic capacity = arguments['capacity'];
     List<int> items = [for (int i = 0; i <= capacity; i += 1) i];
-    List<String> ticketTypes = ['Preferencial', 'General'];
-    String? selectedTicketType = 'General';
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Generar boletas'),
@@ -91,6 +91,7 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
                         .toList(),
                     onChanged: (value) => setState(() {
                       selectedTicketType = value;
+                      print(value);
                     }),
                   )
                 ],
