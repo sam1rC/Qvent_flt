@@ -91,7 +91,7 @@ class _EventInfoCardState extends State<EventInfoCard> {
                     children: [
                       AutoSizeText(
                         'Boletas preferenciales',
-                        style: TextStyle(fontSize: 20.sp),
+                        style: TextStyle(fontSize: 18.sp),
                         maxLines: 1,
                       ),
                       Container(
@@ -117,7 +117,7 @@ class _EventInfoCardState extends State<EventInfoCard> {
                     children: [
                       AutoSizeText(
                         'Boletas generales',
-                        style: TextStyle(fontSize: 20.sp),
+                        style: TextStyle(fontSize: 18.sp),
                         maxLines: 1,
                       ),
                       Container(
@@ -201,7 +201,7 @@ class _TicketsButtonsState extends State<TicketsButtons> {
         ElevatedButton(
           onPressed: () {
             Navigator.pushNamed(context, '/available_tickets', arguments: {
-              "tickets": widget.ticketsGen,
+              "tickets": widget.ticketsPref,
             });
           },
           child: const Text('Boletas preferenciales'),

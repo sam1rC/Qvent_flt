@@ -43,7 +43,14 @@ Future<void> updateEventTickets(String uid, List<dynamic> tickets) async {
   await db
       .collection('events')
       .doc(uid)
-      .set({"tickets": tickets}, SetOptions(merge: true));
+      .set({"ticketsGen": tickets}, SetOptions(merge: true));
+}
+
+Future<void> updateEventTicketsPref(String uid, List<dynamic> tickets) async {
+  await db
+      .collection('events')
+      .doc(uid)
+      .set({"ticketsPref": tickets}, SetOptions(merge: true));
 }
 
 //delete event

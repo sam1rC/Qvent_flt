@@ -91,7 +91,6 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
                         .toList(),
                     onChanged: (value) => setState(() {
                       selectedTicketType = value;
-                      print(value);
                     }),
                   )
                 ],
@@ -101,7 +100,8 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
               ),
               ElevatedButton(
                   onPressed: () async {
-                    if (ticketNumber + tickets.length > capacity) {
+                    if (ticketNumber + tickets.length + ticketsPref.length >
+                        capacity) {
                       showDialog(
                           context: context,
                           builder: (context) {
@@ -119,10 +119,20 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
                                 ]);
                           });
                     } else {
-                      tickets = generateTickets(ticketNumber, eventId, tickets);
-                      await updateEventTickets(eventId, tickets).then((_) {
-                        Navigator.pop(context);
-                      });
+                      if (selectedTicketType == 'General') {
+                        tickets =
+                            generateTickets(ticketNumber, eventId, tickets);
+                        await updateEventTickets(eventId, tickets).then((_) {
+                          Navigator.pop(context);
+                        });
+                      } else {
+                        ticketsPref =
+                            generateTickets(ticketNumber, eventId, ticketsPref);
+                        await updateEventTicketsPref(eventId, ticketsPref)
+                            .then((_) {
+                          Navigator.pop(context);
+                        });
+                      }
                     }
                   },
                   child: const Text('Generar'))
