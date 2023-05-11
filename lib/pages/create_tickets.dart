@@ -20,9 +20,12 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
     dynamic tickets = arguments['tickets'];
+    dynamic ticketsPref = arguments['ticketsPref'];
     dynamic eventId = arguments['eventId'];
     dynamic capacity = arguments['capacity'];
     List<int> items = [for (int i = 0; i <= capacity; i += 1) i];
+    List<String> ticketTypes = ['Preferencial', 'General'];
+    String? selectedTicketType = 'General';
     return Scaffold(
       appBar: AppBar(
         title: const Text('Generar boletas'),
@@ -32,7 +35,7 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
           padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 5.h),
           child: Column(
             children: [
-              Row(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
@@ -76,6 +79,20 @@ class _CreateTicketsPageState extends State<CreateTicketsPage> {
                       );
                     },
                   ),
+                  DropdownButton(
+                    value: selectedTicketType,
+                    items: ticketTypes
+                        .map(
+                          (item) => DropdownMenuItem(
+                            value: item,
+                            child: Text(item),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) => setState(() {
+                      selectedTicketType = value;
+                    }),
+                  )
                 ],
               ),
               SizedBox(

@@ -14,7 +14,8 @@ Future<List> getEvents() async {
       "date": data["date"],
       "name": data["name"],
       "read_tickets": data["read_tickets"],
-      "tickets": data["tickets"],
+      "ticketsPref": data["ticketsPref"],
+      "ticketsGen": data["ticketsGen"],
       "uid": doc.id,
       "capacity": doc["capacity"],
     };
@@ -31,7 +32,8 @@ Future<void> addEvent(String name, String date, String capacity) async {
     "name": name,
     "date": date,
     "capacity": formatedCapacity,
-    "tickets": [],
+    "ticketsPref": [],
+    "ticketsGen": [],
     "read_tickets": 0
   });
 }

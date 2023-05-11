@@ -23,7 +23,8 @@ class _EventInfoPageState extends State<EventInfoPage> {
 
     final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
     String title = arguments['name'];
-    var tickets = arguments['tickets'];
+    var ticketsPref = arguments['ticketsPref'];
+    var ticketsGen = arguments['ticketsGen'];
     int read_tickets = arguments['read_tickets'];
     dynamic eventId = arguments['uid'];
     int capacity = arguments['capacity'];
@@ -34,11 +35,13 @@ class _EventInfoPageState extends State<EventInfoPage> {
       body: Column(
         children: [
           EventInfoCard(
-              ticketsLength: tickets.length, readTickets: read_tickets),
+              ticketsPrefLength: ticketsPref.length,
+              ticketsGenLength: ticketsGen.length),
           TicketsButtons(
             notifyParent:
                 refresh, //this is to notify when the tickets have been generated to refresh the info
-            tickets: tickets,
+            ticketsPref: ticketsPref,
+            ticketsGen: ticketsGen,
             eventId: eventId,
             read_tickets: read_tickets,
             capacity: capacity,
@@ -47,7 +50,7 @@ class _EventInfoPageState extends State<EventInfoPage> {
             height: 5.h,
           ),
           Text(
-            "Te queda disponible el ${(100 - (tickets.length / capacity) * 100)}% del aforo",
+            "Te queda disponible el ${(100 - ((ticketsPref.length + ticketsGen.length) / capacity) * 100)}% del aforo",
             style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
           ),
         ],
@@ -59,9 +62,11 @@ class _EventInfoPageState extends State<EventInfoPage> {
 //This is the top card with the event information mentioned above.
 class EventInfoCard extends StatefulWidget {
   const EventInfoCard(
-      {super.key, required this.ticketsLength, required this.readTickets});
-  final int ticketsLength;
-  final int readTickets;
+      {super.key,
+      required this.ticketsPrefLength,
+      required this.ticketsGenLength});
+  final int ticketsPrefLength;
+  final int ticketsGenLength;
 
   @override
   State<EventInfoCard> createState() => _EventInfoCardState();
@@ -85,7 +90,7 @@ class _EventInfoCardState extends State<EventInfoCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       AutoSizeText(
-                        'Boletas disponibles',
+                        'Boletas preferenciales',
                         style: TextStyle(fontSize: 20.sp),
                         maxLines: 1,
                       ),
@@ -97,7 +102,7 @@ class _EventInfoCardState extends State<EventInfoCard> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 5.w, vertical: 1.h),
                           child: AutoSizeText(
-                            '${widget.ticketsLength}',
+                            '${widget.ticketsPrefLength}',
                             style: TextStyle(
                               fontSize: 15.sp,
                             ),
@@ -111,7 +116,7 @@ class _EventInfoCardState extends State<EventInfoCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       AutoSizeText(
-                        'Boletas leídas',
+                        'Boletas generales',
                         style: TextStyle(fontSize: 20.sp),
                         maxLines: 1,
                       ),
@@ -123,7 +128,7 @@ class _EventInfoCardState extends State<EventInfoCard> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 5.w, vertical: 1.h),
                           child: AutoSizeText(
-                            '${widget.readTickets}',
+                            '${widget.ticketsGenLength}',
                             style: TextStyle(
                               fontSize: 15.sp,
                             ),
@@ -145,13 +150,15 @@ class TicketsButtons extends StatefulWidget {
   final Function() notifyParent; //This function refresh the parent widget
   const TicketsButtons(
       {super.key,
-      required this.tickets,
+      required this.ticketsPref,
+      required this.ticketsGen,
       required this.eventId,
       required this.read_tickets,
       required this.capacity,
       required this.notifyParent});
   final eventId;
-  final tickets;
+  final ticketsGen;
+  final ticketsPref;
   final read_tickets;
   final capacity;
   @override
@@ -171,8 +178,9 @@ class _TicketsButtonsState extends State<TicketsButtons> {
               '/create_tickets',
               arguments: {
                 "eventId": widget.eventId,
-                "tickets": widget.tickets,
+                "tickets": widget.ticketsGen,
                 "capacity": widget.capacity,
+                "ticketsPref": widget.ticketsPref,
               },
             );
             //update info page
@@ -184,17 +192,26 @@ class _TicketsButtonsState extends State<TicketsButtons> {
         ElevatedButton(
           onPressed: () {
             Navigator.pushNamed(context, '/available_tickets', arguments: {
-              "tickets": widget.tickets,
+              "tickets": widget.ticketsGen,
             });
           },
-          child: const Text('Boletas disponibles'),
+          child: const Text('Boletas generales'),
+        ),
+        SizedBox(height: 2.h),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/available_tickets', arguments: {
+              "tickets": widget.ticketsGen,
+            });
+          },
+          child: const Text('Boletas preferenciales'),
         ),
         SizedBox(height: 2.h),
         ElevatedButton(
           onPressed: () {
             Navigator.pushNamed(context, '/read_tickets', arguments: {
               "eventId": widget.eventId,
-              "tickets": widget.tickets,
+              "tickets": widget.ticketsGen,
               "read:tickets": widget.read_tickets,
             });
           },

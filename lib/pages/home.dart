@@ -97,7 +97,10 @@ class _HomePageState extends State<HomePage> {
                           Navigator.pushNamed(context, '/event_info',
                               arguments: {
                                 "name": snapshot.data?[index]['name'],
-                                "tickets": snapshot.data?[index]['tickets'],
+                                "ticketsGen": snapshot.data?[index]
+                                    ['ticketsGen'],
+                                "ticketsPref": snapshot.data?[index]
+                                    ['ticketsPref'],
                                 "read_tickets": snapshot.data?[index]
                                     ['read_tickets'],
                                 "uid": snapshot.data?[index]['uid'],
